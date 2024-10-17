@@ -12,9 +12,9 @@
 
 
 <template>
-    <div v-if="props.state <= 2 " >
-        <div class="Brique" v-if="props.state == 0" >
-             {{ props.place}}
+    <div v-if="props.state <= 2 ">
+        <div class="Brique" v-if="props.state == 0">
+            {{ props.place}}
         </div>
         <div class="Triangle" v-else-if="props.state == 1">
 
@@ -23,7 +23,7 @@
 
         </div>
     </div>
-    
+
 </template>
 
 
