@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Casse Brique</title>
+    <style>
+        canvas {
+            border: 2px solid;
+            background-color: wheat;
+        }
+    </style>
+</head>
+
+<body>
+<canvas width="1000" height="600"></canvas>
+
+<script>
+    const canvas = document.querySelector("canvas");
+    const ctx = canvas.getContext("2d");
+
+    let rect = { x: canvas.width/2 -75, y: canvas.height - 100,  width: 150, height: 50 };
+    let balle = { x: rect.x + rect.width/2, y: rect.y, xSpeed: 0, ySpeed: 0, radius :25, FPS:60};
+    let triangle = { x: 75, y: 100, size: 50 };
+
+    function clear() {
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+    }
+
+    function draw() {
+        // dessine la balle
+        ctx.beginPath();
+        ctx.arc(balle.x, balle.y, balle.radius, 0, 2 * Math.PI);
+        ctx.closePath();
+        ctx.fillStyle = "red";
+        ctx.fill();
+
+        // // Dessiner le pad
+        ctx.beginPath();
+        ctx.fillStyle = 'blue';
+        ctx.fillRect(rect.x, rect.y, rect.width, rect.height);
+        ctx.closePath();
+
+        // Dessiner le triangle
+        ctx.beginPath();
+        ctx.moveTo(triangle.x, triangle.y - triangle.size);  // Sommet du triangle
+        ctx.lineTo(triangle.x - triangle.size / 2, triangle.y + triangle.size / 2); // Coin inférieur gauche
+        ctx.lineTo(triangle.x + triangle.size / 2, triangle.y + triangle.size / 2); // Coin inférieur droit
+        ctx.closePath(); // Fermer le tracé
+        ctx.fillStyle = 'green';
+        ctx.fill();
+
+    }
+
+    function collisionBalle() {
+        const collisionCoterDroit = (balle.x + balle.radius >= canvas.width);
+
+        if (collisionCoterDroit) {
+            balle.x = canvas.width - balle.radius;
+            balle.xSpeed = -balle.xSpeed;
+        }
+
+        const collisionCoterGauche = (balle.x - balle.radius <= 0);
+
+        if (collisionCoterGauche) {
+            balle.x = 0 + balle.radius;
+            balle.xSpeed = -balle.xSpeed;
+        }
+
+        const collisionCoterHaut = (balle.y - balle.radius <= 0);
+
+        if (collisionCoterHaut) {
+            balle.y = 0 + balle.radius;
+            balle.ySpeed = -balle.ySpeed;
+        }
+
+        // Collision avec le pad
+        const collisionAvecPad =
+            balle.y + balle.radius >= rect.y &&                 // La balle touche le haut du pad
+            balle.x >= rect.x && balle.x <= rect.x + rect.width; // La balle est au-dessus du pad
+
+        if (collisionAvecPad) {
+            balle.y = rect.y - balle.radius;  // Ajuster la position pour éviter de passer à travers le pad
+            balle.ySpeed = -balle.ySpeed;     // Inverser la direction de la balle
+        }
+    }
+
+
+    function update() {
+        balle.x = balle.x + balle.xSpeed;
+        balle.y = balle.y + balle.ySpeed;
+        collisionBalle();
+    }
+
+    function animate() {
+        clear();
+        draw();
+        update();
+    }
+
+    window.setInterval(animate, 1000 / balle.FPS);
+
+
+    window.addEventListener("keydown", function (e) {
+        switch (e.code) {
+
+            // Déplacement du carré
+            case 'ArrowLeft':
+                if (rect.x - 5 >= 0) rect.x -= 50;
+                break;
+            case 'ArrowRight':
+                if (rect.x + rect.width + 5 <= canvas.width) rect.x += 50;
+                break;
+            case 'Space':
+                if (e.code === 'Space' && balle.xSpeed === 0 && balle.ySpeed === 0) {
+                    balle.xSpeed = 8;
+                    balle.ySpeed = -10;
+                }
+                break;
+        }
+    });
+
+
+</script>
+</body>
+</html>

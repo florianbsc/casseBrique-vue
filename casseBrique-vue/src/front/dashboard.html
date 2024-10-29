@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Brick Breaker Dashboard</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        /* General styling */
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            color: white;
+            background-image: url('../assets/Metaverse.jpg'); /* Replace with your background image path */
+            background-size: cover;
+            background-position: center;
+        }
+
+        /* Centered Dashboard Box */
+        .dashboard-container {
+            text-align: center;
+            background: rgba(0, 0, 0, 0.6);
+            padding: 30px;
+            border-radius: 10px;
+            width: 300px;
+        }
+
+        .dashboard-container h1 {
+            margin: 0;
+            font-size: 24px;
+        }
+
+        .dashboard-container p {
+            margin: 5px 0 20px;
+            font-size: 16px;
+        }
+
+        /* Icons Grid */
+        .icon-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 20px;
+        }
+
+        .icon-grid a {
+            color: white;
+            text-decoration: none;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .icon-grid a i {
+            font-size: 24px;
+            margin-bottom: 5px;
+        }
+
+        /* Footer icons for social media */
+        .social-media {
+            display: flex;
+            justify-content: center;
+            margin-top: 20px;
+            gap: 15px;
+        }
+
+        .social-media a {
+            color: white;
+            font-size: 20px;
+            text-decoration: none;
+        }
+    </style>
+</head>
+<body>
+
+<div class="dashboard-container">
+    <h1>Brick Breaker</h1>
+    <p>CHOOSE A CATEGORY</p>
+
+    <!-- Icons for each link -->
+    <div class="icon-grid">
+        <a href="./jeu.html">
+            <i class="fas fa-gamepad"></i>
+            <span>New Game</span>
+        </a>
+        <a href="level.html">
+            <i class="fas fa-list-ol"></i>
+            <span>Level</span>
+        </a>
+        <a href="custom.html">
+            <i class="fas fa-paint-brush"></i>
+            <span>Custom</span>
+        </a>
+        <a href="shop.html">
+            <i class="fas fa-store"></i>
+            <span>Shop</span>
+        </a>
+        <a href="settings.html">
+            <i class="fas fa-cog"></i>
+            <span>Parametre</span>
+        </a>
+        <a href="info.html">
+            <i class="fas fa-info-circle"></i>
+            <span>Info</span>
+        </a>
+    </div>
+
+    <!-- Social media links -->
+    <div class="social-media">
+        <a href="#"><i class="fab fa-instagram"></i></a>
+        <a href="#"><i class="fab fa-facebook"></i></a>
+        <a href="#"><i class="fab fa-twitter"></i></a>
+    </div>
+</div>
+
+</body>
+</html>
